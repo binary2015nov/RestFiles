@@ -1,5 +1,8 @@
+using System.Collections.Generic;
 using System.Linq;
 using Funq;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using RestFiles.ServiceInterface;
 using ServiceStack;
 
@@ -11,7 +14,7 @@ namespace RestFiles.Tests
         public const string ListeningOn = "http://localhost:8080/";
 
         public TestAppHost()
-            : base("HttpListener Hosts for Unit Tests", typeof(FilesService).GetAssembly()) { }
+            : base("Self Host Integration Tests", typeof(FilesService).GetAssembly()) { }
 
         public AppConfig Config { get; set; }
 
@@ -19,8 +22,9 @@ namespace RestFiles.Tests
         {
             this.Config = new AppConfig
             {
-                RootDirectory = "~/App_Data/files/".MapAbsolutePath(),
-                TextFileExtensions = ".txt,.sln,.proj,.cs,.config,.asax".Split(',').ToList(),
+                RootDirectory = "App_Data/files/",
+                TextFileExtensions = "txt,sln,proj,cs,config,asax".Split(',').ToList(),
+                ExcludeDirectories = new List<string>(),
             };
             container.Register(this.Config);
 

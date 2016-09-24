@@ -4,10 +4,9 @@ using System.Linq;
 using Funq;
 using NUnit.Framework;
 using RestFiles.ServiceInterface;
+using RestFiles.ServiceModel;
 using ServiceStack;
 using File = System.IO.File;
-using Files = RestFiles.ServiceModel.Files;
-using FilesResponse = RestFiles.ServiceModel.FilesResponse;
 
 /* For syntax highlighting and better readability of this file, view it on GitHub:
  * https://github.com/ServiceStack/ServiceStack.Examples/blob/master/src/RestFiles/RestFiles.Tests/SyncRestClientTests.cs
@@ -37,20 +36,17 @@ namespace RestFiles.Tests
         {
             appHost = new TestAppHost();
             appHost.Init();
+            appHost.Start(TestAppHost.ListeningOn);
         }
 
         [OneTimeTearDown]
-        public void TestFixtureTearDown()
-        {
-            appHost?.Dispose();
-            appHost = null;
-        }
+        public void TestFixtureTearDown() => appHost.Dispose();
 
         [SetUp]
         public void OnBeforeEachTest()
         {
             //Setup the files directory with some test files and folders
-            FilesRootDir = appHost.Config.RootDirectory;
+            FilesRootDir = appHost.MapProjectPath("~/App_Data/files/");
             if (Directory.Exists(FilesRootDir))
             {
                 Directory.Delete(FilesRootDir, true);

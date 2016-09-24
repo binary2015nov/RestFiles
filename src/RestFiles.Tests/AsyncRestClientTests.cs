@@ -34,18 +34,17 @@ namespace RestFiles.Tests
         {
             appHost = new TestAppHost();
             appHost.Init();
+            appHost.Start(TestAppHost.ListeningOn);
         }
 
         [OneTimeTearDown]
-        public void TestFixtureTearDown()
-        {
-            appHost?.Dispose();
-        }
+        public void TestFixtureTearDown() => appHost.Dispose();
 
         [SetUp]
         public void OnBeforeEachTest()
         {
-            FilesRootDir = appHost.Config.RootDirectory;
+            //Setup the files directory with some test files and folders
+            FilesRootDir = appHost.MapProjectPath("~/App_Data/files/");
             if (Directory.Exists(FilesRootDir))
             {
                 Directory.Delete(FilesRootDir, true);
@@ -90,16 +89,6 @@ namespace RestFiles.Tests
         }
 
         [Test]
-        public async Task Can_PostAsync_to_path_without_uploaded_files_to_create_a_new_Directory()
-        {
-            var restClient = CreateAsyncRestClient();
-
-            FilesResponse response = await restClient.PostAsync<FilesResponse>("files/SubFolder/NewFolder", new Files());
-
-            Assert.That(Directory.Exists(FilesRootDir + "SubFolder/NewFolder"));
-        }
-
-        [Test]
         public void Can_WebRequest_POST_upload_file_to_save_new_file_and_create_new_Directory()
         {
             var webRequest = WebRequest.Create(WebServiceHostUrl + "files/UploadedFiles/");
@@ -107,7 +96,8 @@ namespace RestFiles.Tests
             var fileToUpload = new FileInfo(FilesRootDir + "TESTUPLOAD.txt");
             using (var stream = fileToUpload.OpenRead())
             {
-                webRequest.UploadFile(stream, MimeTypes.GetMimeType(fileToUpload.Name));
+                webRequest.UploadFile(stream, fileToUpload.Name);
+                var webRes = PclExport.Instance.GetResponse(webRequest);
             }
 
             Assert.That(Directory.Exists(FilesRootDir + "UploadedFiles"));
