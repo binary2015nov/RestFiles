@@ -18,9 +18,9 @@ namespace RestFiles.ServiceInterface
         {
             VirtualFiles.DeleteFolder(Config.RootDirectory);
 
-            foreach (var file in VirtualFiles.GetDirectory("src").GetAllMatchingFiles("*.*"))
+            foreach (var file in VirtualFiles.GetDirectory("wwwroot/src").GetAllMatchingFiles("*.*"))
             {
-                VirtualFiles.WriteFile(file, file.VirtualPath.Replace("src/", Config.RootDirectory));
+                VirtualFiles.WriteFile(file, file.VirtualPath.Replace("wwwroot/src/", Config.RootDirectory));
             }
 
             return new RevertFilesResponse();

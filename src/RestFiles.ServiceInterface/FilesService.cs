@@ -73,7 +73,8 @@ namespace RestFiles.ServiceInterface
             var result = new FolderResult();
 
             var dir = VirtualFiles.GetDirectory(targetPath);
-            foreach (var subDir in dir.Directories)
+            var subFolders = dir.Directories.ToList();
+            foreach (var subDir in subFolders)
             {
                 if (Config.ExcludeDirectories.Contains(subDir.Name)) continue;
 

@@ -27,8 +27,24 @@ namespace RestFiles.Tests
                 ExcludeDirectories = new List<string>(),
             };
             container.Register(this.Config);
+        }
 
-            this.Start(ListeningOn);
+        protected IWebHost WebHost { get; set; }
+
+        public override ServiceStackHost Start(string[] urlBases)
+        {
+            this.WebHost = ConfigureHost(new WebHostBuilder(), urlBases).Build();
+            this.WebHost.Start();
+
+            return this;
+        }
+
+        public override void Dispose()
+        {
+            this.WebHost.Dispose();
+            this.WebHost = null;
+
+            base.Dispose();
         }
     }
 }
