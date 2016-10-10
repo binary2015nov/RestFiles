@@ -59,8 +59,6 @@ namespace RestFiles
                 UseCamelCase = false,
             });
 
-            Config.ScanSkipPaths.RemoveAll(x => x == "wwwroot/"); //remvoe in v1.0.18
-
             var config = new AppConfig
             {
                 RootDirectory = AppSettings.GetString("RootDirectory"),
