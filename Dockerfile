@@ -1,6 +1,6 @@
 FROM microsoft/dotnet:latest
 COPY src /app
-WORKDIR /app
+WORKDIR /app/RestFiles
 RUN ["dotnet", "restore"]
 RUN ["dotnet", "build"]
 EXPOSE 5000/tcp
