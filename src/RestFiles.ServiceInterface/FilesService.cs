@@ -5,7 +5,7 @@ using System.Net;
 using RestFiles.ServiceModel;
 using RestFiles.ServiceModel.Types;
 using ServiceStack;
-using ServiceStack.VirtualPath;
+using ServiceStack.IO;
 
 namespace RestFiles.ServiceInterface
 {

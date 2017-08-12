@@ -1,6 +1,6 @@
 using RestFiles.ServiceModel;
 using ServiceStack;
-using ServiceStack.VirtualPath;
+using ServiceStack.IO;
 
 namespace RestFiles.ServiceInterface
 {
