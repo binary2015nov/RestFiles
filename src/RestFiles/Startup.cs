@@ -55,7 +55,6 @@ namespace RestFiles
 
             SetConfig(new HostConfig
             {
-                DebugMode = true,
                 UseCamelCase = false,
             });
 
