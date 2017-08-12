@@ -1,21 +1,10 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp1.1</TargetFramework>
-    <PreserveCompilationContext>true</PreserveCompilationContext>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
     <AssemblyName>RestFiles</AssemblyName>
-    <OutputType>Exe</OutputType>
     <PackageId>RestFiles</PackageId>
-    <RuntimeFrameworkVersion>1.1.1</RuntimeFrameworkVersion>
-    <PackageTargetFallback>$(PackageTargetFallback);dotnet5.6;portable-net45+win8</PackageTargetFallback>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="wwwroot\**\*" />
-    <None Update="wwwroot\**\*">
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </None>
-  </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="../RestFiles.ServiceInterface/RestFiles.ServiceInterface.csproj" />
@@ -23,10 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Diagnostics" Version="1.*" />
-    <PackageReference Include="Microsoft.AspNetCore.Server.IISIntegration" Version="1.*" />
-    <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="1.*" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="1.*" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0-preview2-final" />
     <PackageReference Include="ServiceStack.Core" Version="1.0.*" />
     <PackageReference Include="ServiceStack.Interfaces.Core" Version="1.0.*" />
     <PackageReference Include="ServiceStack.Text.Core" Version="1.0.*" />

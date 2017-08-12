@@ -1,7 +1,7 @@
 FROM microsoft/dotnet:latest
 COPY src /app
 WORKDIR /app
-RUN ["dotnet", "restore"]
+RUN ["dotnet", "restore", "--configfile", "NuGet.Config"]
 WORKDIR /app/RestFiles
 RUN ["dotnet", "build"]
 EXPOSE 5000/tcp

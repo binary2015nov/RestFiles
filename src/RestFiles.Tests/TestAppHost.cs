@@ -38,13 +38,5 @@ namespace RestFiles.Tests
 
             return this;
         }
-
-        public override void Dispose()
-        {
-            this.WebHost.Dispose();
-            this.WebHost = null;
-
-            base.Dispose();
-        }
     }
 }
