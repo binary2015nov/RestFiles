@@ -1,7 +1,7 @@
 FROM microsoft/dotnet:2.0-sdk
 COPY src /app
 WORKDIR /app
-RUN ["dotnet", "restore", "--configfile", "NuGet.Config"]
+RUN ["dotnet", "restore", "--configfile", "/app/NuGet.Config"]
 WORKDIR /app/RestFiles
 RUN ["dotnet", "build"]
 EXPOSE 5000/tcp
