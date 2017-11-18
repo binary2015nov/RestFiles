@@ -68,6 +68,11 @@ namespace RestFiles
 
             if (!Directory.Exists(config.RootDirectory))
                 Directory.CreateDirectory(config.RootDirectory);
+
+            Plugins.Add(new TemplatePagesFeature { 
+                EnableDebugTemplateToAll = true,         
+                Args = { ["config"] = config }       
+            });
         }
     }
 }
