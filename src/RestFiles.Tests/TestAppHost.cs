@@ -14,29 +14,19 @@ namespace RestFiles.Tests
         public const string ListeningOn = "http://localhost:8080/";
 
         public TestAppHost()
-            : base("Self Host Integration Tests", typeof(FilesService).GetAssembly()) { }
+            : base("Self Host Integration Tests", typeof(FilesService).Assembly) { }
 
-        public AppConfig Config { get; set; }
+        public AppConfig AppConfig { get; set; }
 
         public override void Configure(Container container)
         {
-            this.Config = new AppConfig
+            this.AppConfig = new AppConfig
             {
                 RootDirectory = "App_Data/files/",
                 TextFileExtensions = "txt,sln,proj,cs,config,asax".Split(',').ToList(),
                 ExcludeDirectories = new List<string>(),
             };
-            container.Register(this.Config);
-        }
-
-        protected IWebHost WebHost { get; set; }
-
-        public override ServiceStackHost Start(string[] urlBases)
-        {
-            this.WebHost = ConfigureHost(new WebHostBuilder(), urlBases).Build();
-            this.WebHost.Start();
-
-            return this;
+            container.Register(this.AppConfig);
         }
     }
 }
