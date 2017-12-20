@@ -1,13 +1,16 @@
 language: csharp
-solution: src/RestFiles.sln
 os: linux
 dist: trusty
 sudo: required
-dotnet: 2.0.0-preview2-006497
+dotnet: 2.0.0
 mono: none
 env: DOTNETCORE=1
 services:
   - docker
+addons:
+  apt:
+    packages:
+      - docker-ce
 script:
   - chmod +x ./deploy-envs.sh
   - chmod +x ./scripts/build.sh

@@ -14,11 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="ServiceStack.Core" Version="1.0.*" />
-    <PackageReference Include="ServiceStack.Interfaces.Core" Version="1.0.*" />
-    <PackageReference Include="ServiceStack.Text.Core" Version="1.0.*" />
-    <PackageReference Include="ServiceStack.Client.Core" Version="1.0.*" />
-    <PackageReference Include="ServiceStack.Common.Core" Version="1.0.*" />
+    <PackageReference Include="ServiceStack" Version="5.*" />
   </ItemGroup>
 
 </Project>

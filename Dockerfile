@@ -1,9 +1,13 @@
-FROM microsoft/dotnet:2.0-sdk
+FROM microsoft/aspnetcore-build:2.0 AS build-env
 COPY src /app
 WORKDIR /app
-RUN ["dotnet", "restore", "--configfile", "/app/NuGet.Config"]
-WORKDIR /app/RestFiles
-RUN ["dotnet", "build"]
-EXPOSE 5000/tcp
-ENV ASPNETCORE_URLS https://*:5000
-ENTRYPOINT ["dotnet", "run", "--server.urls", "http://*:5000"]
+
+RUN dotnet restore --configfile ../NuGet.Config
+RUN dotnet publish -c Release -o out
+
+# Build runtime image
+FROM microsoft/aspnetcore:2.0
+WORKDIR /app
+COPY --from=build-env /app/RestFiles/out .
+ENV ASPNETCORE_URLS http://*:5000
+ENTRYPOINT ["dotnet", "RestFiles.dll"]

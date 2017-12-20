@@ -164,7 +164,7 @@ namespace RestFiles.Tests
         }
 
         [Test]
-        public async Task POST_to_an_existing_file_throws_a_500_NotSupportedException()
+        public void POST_to_an_existing_file_throws_a_500_NotSupportedException()
         {
             var restClient = (IRestClient)CreateAsyncRestClient();
 
