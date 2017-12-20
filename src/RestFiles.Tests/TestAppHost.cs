@@ -26,7 +26,7 @@ namespace RestFiles.Tests
                 TextFileExtensions = "txt,sln,proj,cs,config,asax".Split(',').ToList(),
                 ExcludeDirectories = new List<string>(),
             };
-            container.Register(this.AppConfig);
+            container.Register(AppConfig);
         }
     }
 }

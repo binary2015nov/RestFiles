@@ -7,13 +7,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Update="wwwroot\**\*">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="../RestFiles.ServiceInterface/RestFiles.ServiceInterface.csproj" />
     <ProjectReference Include="../RestFiles.ServiceModel/RestFiles.ServiceModel.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.*" />
-    <PackageReference Include="ServiceStack" Version="5.*" />
+    <Reference Include="..\..\lib\ServiceStack.dll" />
+    <Reference Include="..\..\lib\ServiceStack.Client.dll" />
+    <Reference Include="..\..\lib\ServiceStack.Common.dll" />
+    <Reference Include="..\..\lib\ServiceStack.Interfaces.dll" />
+    <Reference Include="..\..\lib\ServiceStack.Text.dll" />
   </ItemGroup>
 
 </Project>

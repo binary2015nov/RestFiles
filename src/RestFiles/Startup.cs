@@ -23,9 +23,7 @@ namespace RestFiles
 
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
-        public void ConfigureServices(IServiceCollection services)
-        {
-        }
+        public void ConfigureServices(IServiceCollection services) { }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
@@ -48,7 +46,10 @@ namespace RestFiles
         /// <summary>
         /// Initializes a new instance of your ServiceStack application, with the specified name and assembly containing the services.
         /// </summary>
-        public AppHost() : base("REST Files", typeof(FilesService).Assembly) { }
+        public AppHost() : base("REST Files", typeof(FilesService).Assembly)
+        {
+            Config.UseCamelCase = false;
+        }
 
         /// <summary>
         /// Configure the container with the necessary routes for your ServiceStack application.
@@ -59,14 +60,9 @@ namespace RestFiles
             //Permit modern browsers (e.g. Firefox) to allow sending of any REST HTTP Method
             Plugins.Add(new CorsFeature());
 
-            SetConfig(new HostConfig
-            {
-                UseCamelCase = false,
-            });
-
             var config = new AppConfig
             {
-                RootDirectory = AppSettings.GetString("RootDirectory"),
+                RootDirectory = AppSettings.Get("RootDirectory"),
                 TextFileExtensions = AppSettings.GetList("TextFileExtensions").ToList(),
                 ExcludeDirectories = AppSettings.GetList("ExcludeDirectories").ToList(),
             };
